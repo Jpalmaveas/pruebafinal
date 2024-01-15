@@ -1,0 +1,38 @@
+<!-- Estructura básica del documento HTML -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Configuración de la codificación de caracteres y la escala del viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la página -->
+    <title>Formulario de Notas</title>
+
+    <!-- Enlace al archivo de estilos CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <!-- Encabezado principal de la página -->
+    <h1>Formulario de Notas</h1>
+
+    <!-- Formulario para el ejercicio 1 con Flask -->
+    <form method="post" action="{{ url_for('ejercicio1') }}">
+        Nota 1: <input type="text" name="nota1" required><br>
+        Nota 2: <input type="text" name="nota2" required><br>
+        Nota 3: <input type="text" name="nota3" required><br>
+        Asistencia (%): <input type="text" name="asistencia" required><br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <!-- Condición para mostrar el resultado del formulario -->
+    {% if resultado %}
+        <h2>Resultado:</h2>
+        <p>Promedio: {{ resultado['promedio'] }}</p>
+        <p>Estado: {{ resultado['estado'] }}</p>
+    {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!-- Estructura básica del documento HTML -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Configuración de la codificación de caracteres y la escala del viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la página -->
+    <title>Formulario de Nombres</title>
+
+    <!-- Enlace al archivo de estilos CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <!-- Encabezado principal de la página -->
+    <h1>Formulario de Nombres</h1>
+
+    <!-- Formulario para el ejercicio 2 con Flask -->
+    <form method="post" action="{{ url_for('ejercicio2') }}">
+        Nombre 1: <input type="text" name="nombre1" required><br>
+        Nombre 2: <input type="text" name="nombre2" required><br>
+        Nombre 3: <input type="text" name="nombre3" required><br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <!-- Condición para mostrar el resultado del formulario -->
+    {% if resultado %}
+        <h2>Resultado:</h2>
+        <p>Nombre más largo: {{ resultado['nombre_mas_largo'] }}</p>
+        <p>Cantidad de caracteres: {{ resultado['cantidad_caracteres'] }}</p>
+    {% endif %}
+</body>
+
+</html>
