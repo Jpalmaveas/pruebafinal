@@ -1,37 +1,48 @@
-<!-- Estructura básica del documento HTML -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Configuración de la codificación de caracteres y la escala del viewport -->
+    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Título de la página -->
-    <title>Formulario de Notas</title>
+    <title>Calculo de compras</title>
 
     <!-- Enlace al archivo de estilos CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-    <!-- Encabezado principal de la página -->
-    <h1>Formulario de Notas</h1>
+    <!-- Encabezado principal -->
+    <h1>Calculo de compras</h1>
 
-    <!-- Formulario para el ejercicio 1 con Flask -->
+    <!-- Formulario para recopilar datos -->
     <form method="post" action="{{ url_for('ejercicio1') }}">
-        Nota 1: <input type="text" name="nota1" required><br>
-        Nota 2: <input type="text" name="nota2" required><br>
-        Nota 3: <input type="text" name="nota3" required><br>
-        Asistencia (%): <input type="text" name="asistencia" required><br>
+        <!-- Campo para ingresar el nombre -->
+        Ingresa tu nombre: <input type="text" name="nombre" required><br>
+
+        <!-- Campo para ingresar la edad -->
+        Ingresa tu edad: <input type="text" name="edad" required><br>
+
+        <!-- Campo para ingresar la cantidad de tarros de pintura a comprar -->
+        Ingresa la cantidad de tarros de pintura a comprar: <input type="text" name="cantidad_tarros" required><br>
+
+        <!-- Botón de envío del formulario -->
         <input type="submit" value="Enviar">
     </form>
 
-    <!-- Condición para mostrar el resultado del formulario -->
+    <!-- Sección para mostrar resultados, solo se muestra si hay resultados disponibles -->
     {% if resultado %}
-        <h2>Resultado:</h2>
-        <p>Promedio: {{ resultado['promedio'] }}</p>
-        <p>Estado: {{ resultado['estado'] }}</p>
+        <!-- Título de la sección de resultados -->
+        <h2>Resultados:</h2>
+
+        <!-- Párrafo para mostrar el nombre -->
+        <p>Nombre: {{ resultado['nombre'] }}</p>
+
+        <!-- Párrafo para mostrar el total sin descuento -->
+        <p>Total sin descuento: ${{ resultado['total_sin_descuento'] }}</p>
+
+        <!-- Párrafo para mostrar el total a pagar con descuento -->
+        <p>Total a pagar con descuento: ${{ resultado['total_con_descuento'] }}</p>
     {% endif %}
 </body>
 

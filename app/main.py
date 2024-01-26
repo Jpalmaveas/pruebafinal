@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request # pylint: disable=import-error
- # Importa las clases y funciones necesarias de Flask
+from flask import Flask, render_template, request
 
-app = Flask(__name__)  # Crea una instancia de la aplicación Flask
+app = Flask(__name__)
+
+# Usuarios registrados con sus contraseñas
+usuarios_registrados = {
+    'juan': 'admin',
+    'pepe': 'user'
+}
 
 @app.route('/')
 def index():
@@ -15,54 +20,54 @@ def index():
 
 @app.route('/ejercicio1', methods=['GET', 'POST'])
 def ejercicio1():
-    """
-    Ruta para el ejercicio 1.
-
-    Returns:
-        str: Renderiza la plantilla 'ejercicio1.html'.
-    """
     resultado = None
 
     if request.method == 'POST':
-        nota1 = float(request.form['nota1'])
-        nota2 = float(request.form['nota2'])
-        nota3 = float(request.form['nota3'])
-        asistencia = float(request.form['asistencia'])
+        # Obtener datos del formulario
+        nombre = request.form['nombre']
+        edad = int(request.form['edad'])
+        cantidad_tarros = int(request.form['cantidad_tarros'])
 
-        promedio = (nota1 + nota2 + nota3) / 3
-        estado = 'Aprobado' if promedio >= 40 and asistencia >= 75 else 'Reprobado'
+        # Calcular el total sin descuento
+        precio_tarro = 9000
+        total_sin_descuento = cantidad_tarros * precio_tarro
 
-        resultado = {'promedio': promedio, 'estado': estado}
+        # Aplicar descuento basado en la edad
+        descuento = 0
+        if 18 <= edad <= 30:
+            descuento = 0.15
+        elif edad > 30:
+            descuento = 0.25
+
+        # Calcular el total con descuento
+        total_con_descuento = total_sin_descuento * (1 - descuento)
+
+        # Crear el resultado a mostrar en la plantilla
+        resultado = {
+            'nombre': nombre,
+            'total_sin_descuento': total_sin_descuento,
+            'total_con_descuento': total_con_descuento,
+        }
 
     return render_template('ejercicio1.html', resultado=resultado)
 
 @app.route('/ejercicio2', methods=['GET', 'POST'])
 def ejercicio2():
-    """
-    Ruta para el ejercicio 2.
-
-    Returns:
-        str: Renderiza la plantilla 'ejercicio2.html'.
-    """
     resultado = None
 
     if request.method == 'POST':
-        nombre1 = request.form['nombre1']
-        nombre2 = request.form['nombre2']
-        nombre3 = request.form['nombre3']
+        # Obtener datos del formulario
+        nombre = request.form['nombre']
+        contrasena = request.form['contrasena']
 
-        nombres = [nombre1, nombre2, nombre3]
-        nombre_mas_largo = max(nombres, key=len)
-        cantidad_caracteres = len(nombre_mas_largo)
-
-        resultado = {
-    'nombre_mas_largo': nombre_mas_largo,
-    'cantidad_caracteres': cantidad_caracteres
-}
+        # Verificar la autenticación del usuario
+        if nombre in usuarios_registrados and usuarios_registrados[nombre] == contrasena:
+            mensaje = f"Bienvenido {'administrador' if nombre == 'juan' else 'usuario'} {nombre}"
+            resultado = {'mensaje': mensaje}
+        else:
+            resultado = {'mensaje': 'Nombre de usuario o contraseña incorrectos'}
 
     return render_template('ejercicio2.html', resultado=resultado)
 
 if __name__ == '__main__':
-    app.run(
-    debug=True
-)  # Ejecuta la aplicación en modo de depuración si se ejecuta directamente el script
+    app.run(debug=True)

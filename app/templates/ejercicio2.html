@@ -1,36 +1,39 @@
-<!-- Estructura básica del documento HTML -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Configuración de la codificación de caracteres y la escala del viewport -->
+    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Título de la página -->
-    <title>Formulario de Nombres</title>
+    <title>Inicio de Sesión</title>
 
     <!-- Enlace al archivo de estilos CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-    <!-- Encabezado principal de la página -->
-    <h1>Formulario de Nombres</h1>
+    <!-- Encabezado principal -->
+    <h1>Inicio de Sesión</h1>
 
-    <!-- Formulario para el ejercicio 2 con Flask -->
+    <!-- Formulario para recopilar datos de inicio de sesión -->
     <form method="post" action="{{ url_for('ejercicio2') }}">
-        Nombre 1: <input type="text" name="nombre1" required><br>
-        Nombre 2: <input type="text" name="nombre2" required><br>
-        Nombre 3: <input type="text" name="nombre3" required><br>
-        <input type="submit" value="Enviar">
+        <!-- Campo para ingresar el nombre -->
+        Ingrese tu nombre: <input type="text" name="nombre" required><br>
+
+        <!-- Campo para ingresar la contraseña, se utiliza el tipo 'password' para ocultar el texto -->
+        Ingrese Contraseña: <input type="password" name="contrasena" required><br>
+
+        <!-- Botón de envío del formulario -->
+        <input type="submit" value="Verificar">
     </form>
 
-    <!-- Condición para mostrar el resultado del formulario -->
+    <!-- Sección para mostrar resultados, solo se muestra si hay resultados disponibles -->
     {% if resultado %}
+        <!-- Título de la sección de resultados -->
         <h2>Resultado:</h2>
-        <p>Nombre más largo: {{ resultado['nombre_mas_largo'] }}</p>
-        <p>Cantidad de caracteres: {{ resultado['cantidad_caracteres'] }}</p>
+
+        <!-- Párrafo para mostrar el mensaje de resultado -->
+        <p>{{ resultado['mensaje'] }}</p>
     {% endif %}
 </body>
 

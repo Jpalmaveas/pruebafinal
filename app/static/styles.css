@@ -14,15 +14,74 @@ h1 {
 
 /* Estilos para los enlaces */
 a {
-    display: block;  /* Hace que el enlace sea un bloque de ancho completo */
+    display: inline-block;  /* Cambiado de block a inline-block */
     width: 200px;  /* Ancho del enlace */
     height: 50px;  /* Altura del enlace */
     line-height: 50px;  /* Alinea verticalmente el texto en el enlace */
-    text-align: center;  /* Centra el texto dentro del enlace */
+    text-align: center;  /* Centra el texto horizontalmente */
     text-decoration: none;  /* Quita la decoración de subrayado del enlace */
     color: #fff;  /* Color del texto blanco */
     background-color: #1387bd;  /* Color de fondo azul */
-    margin: 0 auto 20px auto;  /* Margen cero en los lados y 20px arriba/abajo, centrado horizontalmente */
+    margin: 0 10px;  /* Margen cero en los lados y 20px arriba/abajo, centrado horizontalmente */
     border-radius: 5px;  /* Bordes redondeados */
-    text-align: center;  /* Centra el texto dentro del enlace */
 }
+
+/* Estilos específicos para el enlace del Ejercicio 1 (rosado) */
+a.pink-link {
+    background-color: #FF69B4;  /* Pink */
+}
+
+/* Estilos específicos para el enlace del Ejercicio 2 (lightblue) */
+a.lightblue-link {
+    background-color: #ADD8E6;  /* Lightblue */
+}
+
+/* Estilos para los formularios */
+form {
+    display: inline-block;
+    text-align: left;
+    margin: 20px;
+}
+
+/* Estilos para los botones */
+input[type="submit"] {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+/* Estilos específicos para el botón de Ejercicio 1 (azul y blanco) */
+form[action="/ejercicio1"] input[type="submit"] {
+    background-color: #1387bd;  /* Azul */
+}
+
+/* Estilos específicos para el botón de Ejercicio 2 (lightblue y blanco) */
+form[action="/ejercicio2"] input[type="submit"] {
+    background-color: #1387bd;  /* Azul */
+}
+
+/* Estilos adicionales para mejorar la legibilidad del texto en los formularios */
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos para los mensajes de resultado */
+#resultado {
+    margin-top: 20px;
+    color: #000000;
+}
+
